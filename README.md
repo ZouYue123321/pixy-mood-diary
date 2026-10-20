@@ -1,58 +1,42 @@
-> [!IMPORTANT]
-> - **Source development resumed in 2026.** See [latest source release](https://github.com/mrzmyr/pixy-mood-tracker-app/releases/latest).
-> - **Store updates are pending.** App Store and Google Play still offer version 1.68.0 from December 24, 2022. See [app facts](./docs/app-facts.json) for verified release details.
+# 像素心情日记 · Pixy 网页版
 
-<br />
-<p align="center">
-  <a href="https://github.com/mrzmyr/pixy-mood-tracker-app">
-    <img src="./docs/icon.png" alt="Logo" width="80" height="80">
-  </a>
+> 一天一格，一年一张像素画。给大学生和职场新人的轻量情绪日记。
 
-  <h3 align="center">Pixy Mood Tracker</h3>
+**在线体验：** https://zouyue123321.github.io/pixy-mood-diary/
 
-  <p align="center">Minimalistic app to track your mood within one pixel a day.</p>
-  <p align="center">
-    <a href="https://apps.apple.com/de/app/pixy-mood-tracker/id1605327124">Apple App Store</a>
-    ·
-    <a href="https://play.google.com/store/apps/details?id=com.devmood.pixymoodtracker">Google Play Store</a>
-  </p>
-</p>
+![截图](web/screenshot.png)
 
-## About The Project
+## 这是什么
 
-<p align="center">
-  <img src="./docs/screen-1.png" width="400px">
-</p>
+基于开源情绪记录 App [Pixy](https://github.com/mrzmyr/pixy-mood-tracker-app) 改编的中文网页版。每天选一个心情颜色、点几个标签，就能在「年度像素图」上点亮一格；「每周回顾」会根据你的记录生成一段小结和建议。数据只存在浏览器 localStorage 里。
 
-Pixy is a free, open source mood tracker for iPhone and Android. No ads, no account.
+网页版代码在 [`web/`](web/) 目录，由 `gh-pages` 分支部署。仓库其余部分是原 Pixy（React Native / Expo）App 的源码，原样保留。
 
-- Log mood, emotions, tags, and notes. More than one entry per day.
-- Year in Pixels, calendar, filters, and statistics
-- Entries stored on device. Export and import backups.
-- Switch from 21 other apps in under 5 minutes with [Pixy Switch](https://pixy-switch.vercel.app)
-- 31 languages ([docs/i18n.md](./docs/i18n.md))
+## 目标用户
 
-Full list with status: [docs/app-facts.json](./docs/app-facts.json).
+刚上大学、正在实习或刚入职的年轻人：压力来源多（考试、求职、加班、人际），但很少有时间和习惯去写长篇日记。
 
-### Built With
+## 用户痛点与产品思考
 
-- [React Native](https://reactnative.dev/)
-- [Expo](https://expo.dev/) and [Expo Router](https://docs.expo.dev/router/introduction/)
+- **记录门槛高** → 一天只记一格：7 档心情颜色 + 场景标签 + 可选一句话（限 140 字），10 秒完成。
+- **不知道自己的情绪被什么影响** → 每周回顾对比「有某个标签的日子」和整体平均心情。只有同一标签至少出现 3 次才下结论，避免样本太少乱归因。
+- **标签要贴近场景** → 原 App 的标签是用户自建的；网页版预置了上课、考试、实习、求职面试、加班、开会、熬夜、通勤等大学生和新人高频场景，开箱即用。
+- **"AI 回顾" 要可信** → 这版不调用大模型，回顾文案由规则生成，并在界面上明确标注「按规则生成」。规则可解释、零成本、不上传数据。后续可以把同样的结构化统计交给大模型润色。
+- **情绪安全** → 如果一周里连续 3 天以上是「很糟 / 崩溃」，回顾会换成温和的提示，建议找信任的人或学校 / 公司心理咨询服务聊聊，而不是继续给效率建议。
+- **空状态** → 本周记录少于 3 天时不硬凑结论，而是告诉用户还差几天；提供「填入示例数据」按钮（明确标注为示例，可一键清空）方便体验。
 
-## Development
+## 我改编了什么
 
-See [docs/development.md](./docs/development.md) for setup, build, and release instructions.
+- 确认原项目是 React Native + Expo App（依赖大量原生模块、bun 工具链），没有直接用 Expo 导出 web，而是在 `web/` 新增一个零依赖的轻量网页实现
+- 延续原设计：7 档心情配色取自原项目默认色阶 `src/constants/colors/scales.ts`（emerald → neutral → orange → red），心情分值 0–6 与原 `RATING_MAPPING` 一致
+- 新增：中文界面、场景标签、年度像素图（12 月 × 31 天，点格子可补记）、年度统计、规则生成的每周回顾、示例数据
 
-## Contributing
+## 本地运行
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
+```bash
+cd web && python3 -m http.server 8000
+```
 
-## Contact
+## 致谢
 
-mrzmyr [@mrzmyr](https://twitter.com/mrzmyr)
-
-Project Link: [https://github.com/mrzmyr/pixy-mood-tracker-app](https://github.com/mrzmyr/pixy-mood-tracker-app)
-
-### Supported Languages
-
-See [docs/i18n.md](./docs/i18n.md).
+基于 [mrzmyr/pixy-mood-tracker-app](https://github.com/mrzmyr/pixy-mood-tracker-app)（作者 mrzmyr，MIT License）改造。原 LICENSE 见 [LICENSE.md](LICENSE.md)，原 README 见 [README.original.md](README.original.md)。
