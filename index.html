@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>像素心情日记 · Pixy 网页版</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="px"><i></i><i></i><i></i><i></i></span><b>像素心情日记</b></div>
+  <nav><button data-tab="today" class="on">今天</button><button data-tab="year">年度像素</button><button data-tab="week">每周回顾</button></nav>
+</header>
+<main>
+  <section id="today" class="tab">
+    <p class="date" id="dateLabel"></p>
+    <h1>今天过得怎么样？</h1>
+    <p class="sub">一天只记一格。不用写长文，选个颜色、点几个标签就好。</p>
+    <div class="moods" id="moods"></div>
+    <h3>今天和什么有关？</h3>
+    <div class="tags" id="tags"></div>
+    <h3>一句话（可选）</h3>
+    <textarea id="note" maxlength="140" placeholder="比如：组会被导师夸了 / 第一次独立跟完一个需求"></textarea>
+    <div class="row"><input type="date" id="pick"><button class="primary" id="save">记下今天</button></div>
+    <p class="hint" id="saved"></p>
+  </section>
+
+  <section id="year" class="tab hidden">
+    <div class="yhead"><button class="ghost" id="yPrev">‹</button><h1 id="yLabel"></h1><button class="ghost" id="yNext">›</button></div>
+    <p class="sub">每一格是一天，点格子可以补记或修改。</p>
+    <div class="grid" id="grid"></div>
+    <div class="legend" id="legend"></div>
+    <div class="ystats" id="ystats"></div>
+  </section>
+
+  <section id="week" class="tab hidden">
+    <div class="yhead"><button class="ghost" id="wPrev">‹</button><h1 id="wLabel"></h1><button class="ghost" id="wNext">›</button></div>
+    <div class="weekstrip" id="strip"></div>
+    <div class="review" id="review"></div>
+  </section>
+  <div class="demo"><button class="link" id="demo">填入示例数据看看效果</button> · <button class="link" id="clear">清空全部数据</button></div>
+</main>
+<footer>基于 <a href="https://github.com/mrzmyr/pixy-mood-tracker-app" target="_blank" rel="noopener">Pixy Mood Tracker</a>（MIT，作者 mrzmyr）改造的网页版 · 数据只保存在你的浏览器里</footer>
+<script src="app.js"></script>
+</body>
+</html>
